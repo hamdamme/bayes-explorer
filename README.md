@@ -49,4 +49,6 @@ Project code is released under the MIT License; see [LICENSE](LICENSE). Third-pa
 
 ## Deployment
 
-This static site can be deployed to any static host. A deployment at `hamdam.me/bayes` requires a route or rewrite on the existing Hamdam site/hosting project. Keep that integration isolated from the portfolio’s root page and existing routes.
+The public preview is published with GitHub Pages from the `main` branch root: <https://hamdamme.github.io/bayes-explorer/>. GitHub Actions builds and deploys each update to that branch.
+
+A deployment at `hamdam.me/bayes` requires a dedicated route in Hamdam’s existing Next.js App Router project or a host-level path rewrite to this static site. Keep that integration isolated from the portfolio’s root page and existing routes.
