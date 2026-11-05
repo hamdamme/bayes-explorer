@@ -67,6 +67,24 @@ function updateCoin() {
     : `With this prior and these ${heads + tails} observations, the estimated chance of heads is ${percent(pct, 2)}.`;
 }
 
+function simulateFlips() {
+  const count = Number(document.querySelector("#flip-count").value);
+  if (![10, 100, 1000].includes(count)) return;
+
+  let heads = 0;
+  for (let i = 0; i < count; i += 1) {
+    if (Math.random() < 0.5) heads += 1;
+  }
+  const tails = count - heads;
+  document.querySelector("#heads").value = String(heads);
+  document.querySelector("#tails").value = String(tails);
+  document.querySelector("#simulation-status").textContent =
+    `Simulated ${count.toLocaleString()} fair-coin flips: ${heads} heads and ${tails} tails. Run again for a new sample.`;
+  updateCoin();
+}
+
+document.querySelector("#simulate-flips").addEventListener("click", simulateFlips);
+
 document.querySelectorAll("#bayes-form input").forEach((input) => input.addEventListener("input", updateBayes));
 document.querySelectorAll("#coin-form input").forEach((input) => input.addEventListener("input", updateCoin));
 document.querySelectorAll("form").forEach((form) => form.addEventListener("submit", (event) => event.preventDefault()));
