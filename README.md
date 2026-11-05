@@ -41,7 +41,7 @@ Bayesian reasoning updates uncertainty; it does not guarantee certainty. Bayes�
 
 - Thomas Bayes, [“An Essay towards solving a Problem in the Doctrine of Chances” (1763)](https://bayes.wustl.edu/Manual/an.essay.pdf).
 - Slavutsky and Blei, [“Quantifying Uncertainty in the Presence of Distribution Shifts” (NeurIPS 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/8b7d8779c020fa3671ad267152362d56-Abstract-Conference.html) — modern research, not a beginner prerequisite.
-- Chan, Molina, and Metzler, [“Estimating Epistemic and Aleatoric Uncertainty with a Single Model” (NeurIPS 2024)](https://proceedings.neurips.cc/paper_files/paper/2024/hash/c693c3ff83259aebcd55a41ab19a5d84-Abstract-Conference.html) — modern research, not a beginner prerequisite.
+- Chan, Molina, and Metzler, [“Estimating Epistemic and Aleatoric Uncertainty with a Single Model” (NeurIPS 2024)](https://proceedings.neurips.cc/paper_files/paper/2024/hash/c693c3ff83259aebcd55a41ab19a5d84-Abstract-Conference.html) — introduces hyper-diffusion models to estimate reducible model uncertainty and inherent data uncertainty with one model; modern research, not a beginner prerequisite.
 
 ## License
 

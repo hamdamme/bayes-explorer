@@ -46,7 +46,7 @@ function updateCoin() {
   const error = document.querySelector("#coin-error");
   const heads = Number(headsField.value);
   const tails = Number(tailsField.value);
-  const valid = Number.isInteger(heads) && Number.isInteger(tails) && heads >= 0 && tails >= 0 && heads <= 100000 && tails <= 100000;
+  const valid = headsField.value.trim() !== "" && tailsField.value.trim() !== "" && Number.isInteger(heads) && Number.isInteger(tails) && heads >= 0 && tails >= 0 && heads <= 100000 && tails <= 100000;
   if (!valid) {
     error.textContent = "Enter whole numbers from 0 to 100,000 for both observations.";
     document.querySelector("#coin-posterior").textContent = "—";
