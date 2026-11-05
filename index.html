@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f2ed" />
+    <meta name="description" content="A hands-on, beginner-friendly guide to Bayesian reasoning." />
+    <title>Bayes Explorer — Learn by updating</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to lesson</a>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="Bayes Explorer home"><span class="brand-mark">B<span>.</span></span><span>Bayes Explorer</span></a>
+        <nav aria-label="Lesson sections">
+          <a href="#lesson">The idea</a><a href="#calculator">Calculator</a><a href="#coin">Coin flips</a><a href="#reading">Reading</a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero panel" id="top" aria-labelledby="page-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="dot"></span> A small, interactive lesson</p>
+            <h1 id="page-title">Learn by <em>updating.</em></h1>
+            <p class="lede">Bayesian reasoning is a way to revise what seems likely when new evidence arrives. Start with a belief, ask how well the evidence fits, and update.</p>
+            <a class="button-link" href="#lesson">Start exploring <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit-core">P</div>
+            <span class="orbit-label label-prior">prior</span><span class="orbit-label label-evidence">evidence</span><span class="orbit-label label-post">posterior</span>
+          </div>
+        </section>
+
+        <section class="lesson section" id="lesson" aria-labelledby="lesson-title">
+          <div class="section-heading"><p class="section-number">01 / THE IDEA</p><h2 id="lesson-title">One theorem, three moving parts</h2></div>
+          <p class="section-intro">Bayes’ theorem connects a starting probability to evidence and a revised probability.</p>
+          <div class="theorem" aria-label="Probability of hypothesis given evidence equals probability of evidence given hypothesis times probability of hypothesis divided by probability of evidence">
+            <span>P(H | E)</span><b>=</b><span class="fraction"><span>P(E | H) × P(H)</span><span>P(E)</span></span>
+          </div>
+          <dl class="terms">
+            <div><dt>Prior · P(H)</dt><dd>How plausible the hypothesis is before the new evidence.</dd></div>
+            <div><dt>Likelihood · P(E | H)</dt><dd>How expected this evidence would be if the hypothesis were true.</dd></div>
+            <div><dt>Evidence · P(E)</dt><dd>The overall chance of seeing this evidence across the possibilities considered.</dd></div>
+            <div><dt>Posterior · P(H | E)</dt><dd>The updated probability of the hypothesis after considering the evidence.</dd></div>
+          </dl>
+          <aside class="note"><strong>What Bayes does:</strong> updates uncertainty under stated assumptions; it does not guarantee certainty. Bayes’ theorem is one rule. <em>Bayesian statistics</em> is the broader approach of using probability models and updating beliefs about unknown quantities.</aside>
+        </section>
+
+        <section class="section" id="calculator" aria-labelledby="calculator-title">
+          <div class="section-heading"><p class="section-number">02 / TRY IT</p><h2 id="calculator-title">A positive result is not the whole story</h2></div>
+          <p class="section-intro">Change the starting rate and test behavior. Watch how the same positive result can mean different things.</p>
+          <div class="tool-grid">
+            <form class="panel controls" id="bayes-form">
+              <label for="prior">Starting probability <output id="prior-value" for="prior">1%</output></label>
+              <input id="prior" type="range" min="0" max="100" step="1" value="1" />
+              <p class="hint">Prior probability that the hypothesis is true.</p>
+              <label for="sensitivity">True-positive rate <output id="sensitivity-value" for="sensitivity">90%</output></label>
+              <input id="sensitivity" type="range" min="0" max="100" step="1" value="90" />
+              <p class="hint">Chance of a positive result when the hypothesis is true.</p>
+              <label for="false-positive">False-positive rate <output id="false-positive-value" for="false-positive">5%</output></label>
+              <input id="false-positive" type="range" min="0" max="100" step="1" value="5" />
+              <p class="hint">Chance of a positive result when the hypothesis is false.</p>
+            </form>
+            <div class="panel results" aria-live="polite" aria-atomic="true">
+              <p class="result-kicker">UPDATED PROBABILITY</p>
+              <div class="posterior-row"><div><span class="mini-label">After a positive result</span><strong id="positive-result">15.4%</strong></div><div><span class="mini-label">After a negative result</span><strong id="negative-result">0.11%</strong></div></div>
+              <div class="bar-track" aria-hidden="true"><span id="posterior-bar"></span></div>
+              <p class="calculation" id="positive-step">P(H | +) = P(+ | H) × P(H) ÷ P(+)</p>
+              <p class="calculation" id="negative-step">P(H | −) = P(− | H) × P(H) ÷ P(−)</p>
+              <div class="counts">
+                <div><span>Expected true positives</span><b id="true-count">9</b></div>
+                <div><span>Expected false positives</span><b id="false-count">50</b></div>
+                <div><span>Expected positive results</span><b id="all-positive-count">59</b></div>
+              </div>
+              <p class="hint">Expected counts per 1,000 example cases, based on the selected rates. Counts may be fractional.</p>
+              <p class="edge-message" id="edge-message" role="status"></p>
+            </div>
+          </div>
+          <p class="caution">Illustrative probabilities only. Real evidence may depend on sampling, measurement quality, and assumptions that this simple model does not capture.</p>
+        </section>
+
+        <section class="section" id="coin" aria-labelledby="coin-title">
+          <div class="section-heading"><p class="section-number">03 / TRY IT</p><h2 id="coin-title">Update a coin-flip belief</h2></div>
+          <p class="section-intro">Suppose the coin’s chance of heads is unknown. Enter observations and see a simple Bayesian update.</p>
+          <div class="coin-layout">
+            <form class="panel controls coin-controls" id="coin-form">
+              <label for="heads">Heads observed</label><input id="heads" type="number" min="0" max="100000" step="1" value="7" inputmode="numeric" />
+              <label for="tails">Tails observed</label><input id="tails" type="number" min="0" max="100000" step="1" value="3" inputmode="numeric" />
+              <p class="hint">Enter whole numbers from 0 to 100,000. These observations are treated as independent flips.</p>
+            </form>
+            <div class="panel coin-result" aria-live="polite" aria-atomic="true">
+              <p class="result-kicker">COIN MODEL</p>
+              <p class="mini-label">Assumed prior: Beta(2, 2), centered at 50%</p>
+              <div class="coin-probability"><strong id="coin-posterior">64.3%</strong><span>updated chance of heads</span></div>
+              <div class="equation-line" id="coin-equation">(2 + 7) ÷ (2 + 2 + 7 + 3) = 64.3%</div>
+              <div class="coin-meter" aria-hidden="true"><span id="coin-meter-fill"></span></div>
+              <p id="coin-explanation">With this prior and these observations, the estimated chance of heads is 64.3%.</p>
+              <p class="hint">The prior is an assumption, not a fact about your coin. A different prior can produce a different posterior, especially with few flips. More observations usually make the prior matter less.</p>
+              <p class="edge-message" id="coin-error" role="status"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section examples" id="examples" aria-labelledby="examples-title">
+          <div class="section-heading"><p class="section-number">04 / FOLLOW ALONG</p><h2 id="examples-title">Two updates, worked through</h2></div>
+          <div class="example-grid">
+            <article class="panel example-card"><p class="example-tag">HYPOTHETICAL TEST</p><h3>A rare event and a positive result</h3><p>Assume a 1% prior, 90% true-positive rate, and 5% false-positive rate. In 1,000 cases:</p><ul class="math-list"><li>10 have the condition; 90% of 10 = <b>9 true positives</b>.</li><li>990 do not; 5% of 990 = <b>49.5 false positives</b>.</li><li>9 ÷ (9 + 49.5) = <b>about 15.4%</b> probability after a positive result.</li></ul><p class="small-note">These invented numbers explain the arithmetic; they are not medical guidance or a real test’s performance.</p></article>
+            <article class="panel example-card"><p class="example-tag">EVERYDAY EVIDENCE</p><h3>Will it rain?</h3><p>Suppose the prior chance of rain is 30%. For illustration, gray clouds appear on 80% of rainy days and 25% of dry days.</p><ul class="math-list"><li>Rain and gray clouds: 0.30 × 0.80 = <b>0.24</b>.</li><li>Dry and gray clouds: 0.70 × 0.25 = <b>0.175</b>.</li><li>0.24 ÷ (0.24 + 0.175) = <b>about 57.8%</b> after seeing gray clouds.</li></ul><p class="small-note">The likelihoods are made-up teaching assumptions, not a local forecast.</p></article>
+          </div>
+        </section>
+
+        <section class="section" id="mistakes" aria-labelledby="mistakes-title">
+          <div class="section-heading"><p class="section-number">05 / KEEP IN MIND</p><h2 id="mistakes-title">Common mistakes</h2></div>
+          <div class="mistake-list">
+            <article><span class="mistake-index">A</span><div><h3>Swapping the conditional</h3><p>P(H | E) asks how likely the hypothesis is given evidence. P(E | H) asks how likely the evidence is if the hypothesis is true. They answer different questions and are generally not equal.</p></div></article>
+            <article><span class="mistake-index">B</span><div><h3>Forgetting the starting rate</h3><p>When an event is rare, even a fairly accurate test can produce many false positives relative to true positives. The prior is part of the calculation, not an optional footnote.</p></div></article>
+            <article><span class="mistake-index">C</span><div><h3>Treating assumptions as facts</h3><p>A posterior is only as useful as the model and evidence behind it. Biased samples, changing conditions, and weak measurements can make the likelihoods misleading.</p></div></article>
+          </div>
+        </section>
+
+        <section class="section readings" id="reading" aria-labelledby="reading-title">
+          <div class="section-heading"><p class="section-number">06 / GO FURTHER</p><h2 id="reading-title">Further reading</h2></div>
+          <p class="section-intro">The modern papers are examples of current Bayesian research, not prerequisites for this lesson.</p>
+          <div class="reading-list">
+            <a class="panel reading" href="https://bayes.wustl.edu/Manual/an.essay.pdf" target="_blank" rel="noreferrer"><span class="reading-year">1763</span><span><b>Thomas Bayes, “An Essay towards solving a Problem in the Doctrine of Chances”</b><small>Bayes’s posthumously published work on inverse probability and reasoning from observed outcomes.</small></span><span aria-hidden="true">↗</span></a>
+            <a class="panel reading" href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/8b7d8779c020fa3671ad267152362d56-Abstract-Conference.html" target="_blank" rel="noreferrer"><span class="reading-year">2025</span><span><b>Slavutsky and Blei, “Quantifying Uncertainty in the Presence of Distribution Shifts”</b><small>Modern research on describing uncertainty when data at evaluation time differs from training data.</small><small class="prereq">Modern research · no prerequisite</small></span><span aria-hidden="true">↗</span></a>
+            <a class="panel reading" href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/c693c3ff83259aebcd55a41ab19a5d84-Abstract-Conference.html" target="_blank" rel="noreferrer"><span class="reading-year">2024</span><span><b>Chan, Molina, and Metzler, “Estimating Epistemic and Aleatoric Uncertainty with a Single Model”</b><small>Research on estimating model uncertainty and data noise with a single model.</small><small class="prereq">Modern research · no prerequisite</small></span><span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+      </main>
+      <footer><span>Bayes Explorer</span><span>A browser-only lesson · No data is sent anywhere</span><a href="https://github.com/hamdamme/bayes-explorer">Source code</a></footer>
+    </div>
+  </body>
+</html>
