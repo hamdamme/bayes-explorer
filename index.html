@@ -89,6 +89,18 @@
               <label for="heads">Heads observed</label><input id="heads" type="number" min="0" max="100000" step="1" value="7" inputmode="numeric" />
               <label for="tails">Tails observed</label><input id="tails" type="number" min="0" max="100000" step="1" value="3" inputmode="numeric" />
               <p class="hint">Enter whole numbers from 0 to 100,000. These observations are treated as independent flips.</p>
+              <div class="simulation-controls">
+                <label for="flip-count">Simulate coin flips</label>
+                <div class="simulation-actions">
+                  <select id="flip-count" aria-label="Number of simulated coin flips">
+                    <option value="10">10 flips</option>
+                    <option value="100">100 flips</option>
+                    <option value="1000">1,000 flips</option>
+                  </select>
+                  <button id="simulate-flips" type="button">Simulate Flips</button>
+                </div>
+                <p class="hint" id="simulation-status" role="status" aria-live="polite">Simulations use a fair coin (50% chance of heads) and replace the counts above.</p>
+              </div>
             </form>
             <div class="panel coin-result" aria-live="polite" aria-atomic="true">
               <p class="result-kicker">COIN MODEL</p>
