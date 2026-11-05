@@ -27,7 +27,7 @@ The coin example uses a Beta(2, 2) prior and a Bernoulli likelihood. After `h` h
 ## Interactive features
 
 - Adjustable prior, true-positive rate, and false-positive rate, with positive and negative posteriors, calculation steps, and expected counts per 1,000 cases.
-- Coin-flip updater with editable head and tail counts and a stated Beta prior.
+- Coin-flip updater with editable head and tail counts, a stated Beta prior, and a fair-coin simulator for 10, 100, or 1,000 flips. The simulator replaces the counts and updates the posterior immediately.
 - Worked hypothetical test and weather examples, common pitfalls, symbol definitions, and further reading.
 - Responsive layout, keyboard focus styles, labeled inputs, a skip link, and reduced-motion support.
 
