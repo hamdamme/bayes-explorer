@@ -69,5 +69,6 @@ function updateCoin() {
 
 document.querySelectorAll("#bayes-form input").forEach((input) => input.addEventListener("input", updateBayes));
 document.querySelectorAll("#coin-form input").forEach((input) => input.addEventListener("input", updateCoin));
+document.querySelectorAll("form").forEach((form) => form.addEventListener("submit", (event) => event.preventDefault()));
 updateBayes();
 updateCoin();
